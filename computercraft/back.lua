@@ -9,9 +9,13 @@ local filters = {}
 local ycounts = {}
 local coparams = {}
 
-local ws = http.websocket(url..'ws/')
-if ws == false then
-    error('Unable to connect to server '..url..'ws/')
+local ws = false
+while ws == false do
+    ws = http.websocket(url..'ws/')
+    if ws == false then
+        print('Unable to connect to server '..url..'ws/')
+        os.sleep(2)
+    end
 end
 
 local serialize
